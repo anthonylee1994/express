@@ -1,0 +1,21 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-react"
+    ],
+    "jsRules": {
+    },
+    "rules": {
+        "no-var-requires": false,
+        "jsx-no-multiline-js": false,
+        "jsx-alignment": false,
+        "jsx-no-lambda": false,
+        "jsx-wrap-multiline": false,
+        "jsx-no-bind": false,
+        "object-literal-sort-keys": false,
+        "max-line-length": [false],
+        "no-console": [false]
+    },
+    "rulesDirectory": []
+}

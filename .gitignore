@@ -5,3 +5,4 @@ npm-debug.log
 .git/*
 bower_components/*
 .vscode
+.dist/*

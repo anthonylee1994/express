@@ -49,5 +49,11 @@ module.exports = {
             verbose: true,
             dry: false, // true for simulation
         }),
+        // new UglifyJSPlugin({
+        //     mangle: {
+        //         // Skip mangling these
+        //         except: ['$super', '$', 'exports', 'require']
+        //     }
+        // }),
     ],
 };

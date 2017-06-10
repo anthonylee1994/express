@@ -1,11 +1,11 @@
 const BACKEND_APP_ROOT = ['src'];
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const root_path = path.resolve(__dirname, '../');
 
-// ---- Back End ----
-module.exports = {
+let webpackConfig = {
     devtool: "source-map",
     name: "backend",
     target: 'node',
@@ -44,16 +44,29 @@ module.exports = {
         ],
     },
     plugins: [
-        new CleanWebpackPlugin(['server.js', 'server.js.map'], {
+        new CleanWebpackPlugin(['server.js', 'server.js.map', 'config', 'logs'], {
             root: path.resolve(root_path, 'dist'),
             verbose: true,
             dry: false, // true for simulation
         }),
-        // new UglifyJSPlugin({
-        //     mangle: {
-        //         // Skip mangling these
-        //         except: ['$super', '$', 'exports', 'require']
-        //     }
-        // }),
+        new CopyWebpackPlugin([
+            {
+                from: "config",
+                to: "config",
+            }
+        ]),
     ],
 };
+
+if (process.env.NODE_ENV === "production") {
+    webpackConfig.plugins.push(
+        new UglifyJSPlugin({
+            mangle: {
+                // Skip mangling these
+                except: ['$super', '$', 'exports', 'require']
+            }
+        })
+    );
+}
+
+module.exports = webpackConfig;

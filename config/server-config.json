@@ -1,0 +1,22 @@
+{
+    "development": {
+        "port": 3000,
+        "session": {
+            "secret": "your-secret",
+            "name": "default-session",
+            "resave": false,
+            "saveUninitialized": false,
+            "proxy": false
+        }
+    },
+    "production": {
+        "port": 3000,
+        "session": {
+            "secret": "your-secret",
+            "name": "default-session",
+            "resave": false,
+            "saveUninitialized": false,
+            "proxy": false
+        }
+    }
+}

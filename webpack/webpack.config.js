@@ -66,15 +66,15 @@ let webpackConfig = {
     ],
 };
 
-if (process.env.NODE_ENV === "production") {
-    webpackConfig.plugins.push(
-        new UglifyJSPlugin({
-            mangle: {
-                // Skip mangling these
-                except: ['$super', '$', 'exports', 'require']
-            }
-        })
-    );
-}
+// if (process.env.NODE_ENV === "production") {
+//     webpackConfig.plugins.push(
+//         new UglifyJSPlugin({
+//             mangle: {
+//                 // Skip mangling these
+//                 except: ['$super', '$', 'exports', 'require']
+//             }
+//         })
+//     );
+// }
 
 module.exports = webpackConfig;

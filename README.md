@@ -20,8 +20,9 @@ npm run test                  # all test cases are in "src/spec" directory
 
 ## Deployment
 ```
-npm run build                 # -> build "dist" directory
-                              # copy the "dist" directory to your server
+npm run build                 # build "dist" directory
+cp ./dist * /var/www          # copy the "dist" directory to your server
+node server.js                # RUN!
 ```
 
 

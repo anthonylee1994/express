@@ -1,4 +1,4 @@
-# Express + Sequelize + Winston + TypeScript + Webpack Boilerplate
+# Express + Sequelize + Winston + TypeScript + Webpack MVC Boilerplate
 Express + Sequelize + Winston + TypeScript + Webpack MVC Boilerplate
 
 ## How to use

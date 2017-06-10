@@ -10,6 +10,7 @@ npm run app                   # Run in Development and watch for changes
 
 ## Configuration
 See "config" directory
+
 Warning: Please don't edit the "dist/config" directory
 
 ## Testing

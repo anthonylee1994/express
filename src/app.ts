@@ -5,6 +5,9 @@ import * as express from "express";
 import * as session from "express-session";
 import * as logger from "morgan";
 import * as path from "path";
+import * as memoryStore from "session-memory-store";
+
+const MemoryStore = memoryStore(session);
 
 import index from "./routes/index";
 import {Configs} from "./utils/Configs";
@@ -40,8 +43,11 @@ class ExpressApp {
     this.instance.use(bodyParser.json());
     this.instance.use(bodyParser.urlencoded({ extended: false }));
     this.instance.use(cookieParser());
-    this.instance.use(session(serverConfig.session));
     this.instance.use(compression());
+    this.instance.use(session({
+      ... serverConfig.session,
+      store: new MemoryStore(),
+    }));
 
     // view engine setup
     this.instance.set("views", path.join(__dirname, "views"));

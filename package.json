@@ -6,7 +6,7 @@
     "start": "node ./dist/server.js",
     "app": "nodemon & webpack --watch --config ./webpack/webpack.config.js",
     "test": "cd src && jasmine-ts",
-    "prod": "export NODE_ENV=production && webpack --config ./webpack/webpack.config.js && npm start"
+    "prod": "export NODE_ENV=production && webpack -d --config ./webpack/webpack.config.js && npm start"
   },
   "dependencies": {
     "@types/jasmine": "^2.5.51",
@@ -17,6 +17,7 @@
     "morgan": "^1.8.1",
     "sequelize": "^4.0.0",
     "serve-favicon": "^2.4.1",
+    "session-memory-store": "^0.2.2",
     "winston": "^2.3.1"
   },
   "devDependencies": {

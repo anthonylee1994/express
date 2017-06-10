@@ -44,7 +44,7 @@ let webpackConfig = {
         ],
     },
     plugins: [
-        new CleanWebpackPlugin(['server.js', 'server.js.map', 'config', 'logs'], {
+        new CleanWebpackPlugin(["*"], {
             root: path.resolve(root_path, 'dist'),
             verbose: true,
             dry: false, // true for simulation
@@ -53,7 +53,15 @@ let webpackConfig = {
             {
                 from: "config",
                 to: "config",
-            }
+            },
+            {
+                from: "public",
+                to: "public",
+            },
+            {
+                from: "views",
+                to: "views",
+            },
         ]),
     ],
 };

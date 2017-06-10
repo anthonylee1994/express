@@ -5,8 +5,8 @@ import * as logger from "morgan";
 import * as path from "path";
 import index from "./routes/index";
 
-// import * as ejs from "ejs";
-// import * as favicon from "serve-favicon";
+const ejs = require("ejs").__express;
+import * as favicon from "serve-favicon";
 
 class ExpressApp {
 
@@ -31,11 +31,11 @@ class ExpressApp {
 
     // view engine setup
 
-    // this.instance.set("views", path.join(__dirname, "views"));
-    // this.instance.engine(".html", ejs.renderFile);
-    // this.instance.set("view engine", "html");
-    // this.instance.use(favicon(path.join(__dirname,'public','favicon.ico')));
-    // this.instance.use(express.static(path.join(__dirname, "public")));
+    this.instance.set("views", path.join(__dirname, "views"));
+    this.instance.set("view engine", "ejs");
+    this.instance.engine(".ejs", ejs);
+    this.instance.use(favicon(path.join(__dirname, "public", "favicon.ico")));
+    this.instance.use(express.static(path.join(__dirname, "public")));
   }
 
   private initRoutes = () => {

@@ -1,57 +1,64 @@
-// import * as cls from "continuation-local-storage";
-// import * as fs from "fs";
-// import * as path from "path";
-// import * as SequelizeStatic from "sequelize";
-// import {configs} from "../../../configs/configs";
-// import {logger} from "../utils/logger";
-// import {ProductAttributes, ProductInstance} from "./interfaces/product-interface";
-// import {Sequelize} from "sequelize";
+import * as fs from "fs";
+import * as path from "path";
+import * as SequelizeStatic from "sequelize";
+import { Sequelize as SequelizeLib } from "sequelize";
+import { Configs } from "../utils/Configs";
+import { log } from "../utils/Logger";
 
-// export interface SequelizeModels {
-//   Product: SequelizeStatic.Model<ProductInstance, ProductAttributes>;
-// }
+import Product, { IProductAttributes, IProductInstance } from "./Product";
 
-// class Database {
-//   private _basename: string;
-//   private _models: SequelizeModels;
-//   private _sequelize: Sequelize;
+export interface ISequelizeModels {
+    Product: SequelizeStatic.Model<IProductInstance, IProductAttributes>;
+}
 
-//   constructor() {
-//     this._basename = path.basename(module.filename);
-//     let dbConfig = configs.getDatabaseConfig();
+const importModels: any = {
+    Product,
+};
 
-//     if (dbConfig.logging) {
-//       dbConfig.logging = logger.info;
-//     }
+class DatabaseInstance {
 
-//     (SequelizeStatic as any).cls = cls.createNamespace("sequelize-transaction");
-//     this._sequelize = new SequelizeStatic(dbConfig.database, dbConfig.username,
-//       dbConfig.password, dbConfig);
-//     this._models = ({} as any);
+    private models: ISequelizeModels;
+    private sequelize: SequelizeLib;
 
-//     fs.readdirSync(__dirname).filter((file: string) => {
-//       return (file !== this._basename) && (file !== "interfaces");
-//     }).forEach((file: string) => {
-//       let model = this._sequelize.import(path.join(__dirname, file));
-//       this._models[(model as any).name] = model;
-//     });
+    constructor() {
 
-//     Object.keys(this._models).forEach((modelName: string) => {
-//       if (typeof this._models[modelName].associate === "function") {
-//         this._models[modelName].associate(this._models);
-//       }
-//     });
-//   }
+        let dbConfig;
 
-//   getModels() {
-//     return this._models;
-//   }
+        if (process.env.NODE_ENV === "production") {
+            dbConfig = Configs.getDatabaseConfig().production;
+        } else {
+            dbConfig = Configs.getDatabaseConfig().development;
+        }
 
-//   getSequelize() {
-//     return this._sequelize;
-//   }
-// }
+        if (dbConfig.logging) {
+            dbConfig.logging = console.log;
+        }
 
-// const database = new Database();
-// export const models = database.getModels();
-// export const sequelize = database.getSequelize();
+        this.sequelize = new SequelizeStatic(dbConfig.database, dbConfig.username, dbConfig.password, dbConfig);
+
+        this.models = importModels;
+
+        Object.keys(this.models).forEach((modelName: string) => {
+            this.models[modelName] = this.models[modelName](this.sequelize, SequelizeStatic);
+        });
+
+        Object.keys(this.models).forEach((modelName: string) => {
+            if (typeof this.models[modelName].associate === "function") {
+                this.models[modelName].associate(this.models);
+            }
+        });
+    }
+
+    public getModels() {
+        return this.models;
+    }
+
+    public getSequelize() {
+        return this.sequelize;
+    }
+}
+
+const Database = new DatabaseInstance();
+
+export const Models = Database.getModels();
+export const Sequelize = Database.getSequelize();

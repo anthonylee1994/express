@@ -1,9 +1,21 @@
 import * as bodyParser from "body-parser";
+import * as compression from "compression";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
+import * as session from "express-session";
 import * as logger from "morgan";
 import * as path from "path";
+
 import index from "./routes/index";
+import {Configs} from "./utils/Configs";
+
+let serverConfig: any = {};
+
+if (process.env.NODE_ENV === "production") {
+  serverConfig = Configs.getServerConfig().production;
+} else {
+  serverConfig = Configs.getServerConfig().development;
+}
 
 const ejs = require("ejs").__express;
 import * as favicon from "serve-favicon";
@@ -28,9 +40,10 @@ class ExpressApp {
     this.instance.use(bodyParser.json());
     this.instance.use(bodyParser.urlencoded({ extended: false }));
     this.instance.use(cookieParser());
+    this.instance.use(session(serverConfig.session));
+    this.instance.use(compression());
 
     // view engine setup
-
     this.instance.set("views", path.join(__dirname, "views"));
     this.instance.set("view engine", "ejs");
     this.instance.engine(".ejs", ejs);

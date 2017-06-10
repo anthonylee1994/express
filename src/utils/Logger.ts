@@ -6,7 +6,7 @@ const { Logger, transports } = require("winston");
 import { Configs } from "./Configs";
 
 const config = Configs.getLoggingConfig();
-config.directory = __dirname;
+config.directory = (process.env.NODE_ENV === "test") ? path.resolve( __dirname, "../") : __dirname;
 config.debug.file.filename = path.resolve(config.directory, "logs", config.debug.file.filename);
 config.info.file.filename = path.resolve(config.directory, "logs", config.info.file.filename);
 config.error.file.filename = path.resolve(config.directory, "logs", config.error.file.filename);

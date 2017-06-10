@@ -1,5 +1,14 @@
 import * as http from "http";
 import ExpressApp from "../app";
+import { Configs } from "../utils/Configs";
+
+let serverConfig: any = {};
+
+if (process.env.NODE_ENV === "production") {
+  serverConfig = Configs.getServerConfig().production;
+} else {
+  serverConfig = Configs.getServerConfig().development;
+}
 
 class ExpressServer {
 
@@ -7,7 +16,7 @@ class ExpressServer {
   private server: http.Server;
 
   constructor() {
-    this.port = this.normalizePort(process.env.PORT || 3000);
+    this.port = this.normalizePort(serverConfig.port);
     ExpressApp.set("port", this.port);
   }
 

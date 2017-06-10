@@ -51,15 +51,15 @@ let webpackConfig = {
         }),
         new CopyWebpackPlugin([
             {
-                from: "config",
+                from: path.resolve(...BACKEND_APP_ROOT, "config"),
                 to: "config",
             },
             {
-                from: "public",
+                from: path.resolve(...BACKEND_APP_ROOT, "public"),
                 to: "public",
             },
             {
-                from: "views",
+                from: path.resolve(...BACKEND_APP_ROOT, "views"),
                 to: "views",
             },
         ]),

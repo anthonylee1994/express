@@ -3,6 +3,8 @@ import * as path from "path";
 
 const configPath = (process.env.NODE_ENV === "test") ? path.resolve( __dirname, "../") : __dirname;
 
+console.log(path.resolve( __dirname, "../") );
+
 export class Configs {
 
   public static getDatabaseConfig() {

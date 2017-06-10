@@ -1,5 +1,5 @@
-# Express TypeScript Boilerplate
-Express TypeScript Boilerplate with Webpack 2
+# Express + Sequelize + Winston + TypeScript + Webpack Boilerplate
+Express + Sequelize + Winston + TypeScript + Webpack Boilerplate
 
 ## How to use
 - Just clone it if you want.

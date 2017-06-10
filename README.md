@@ -3,7 +3,7 @@ Express TypeScript Boilerplate with Webpack 2
 
 ## How to use
 - Just clone it if you want.
-- No documentaion will be provided.
+- No documentation will be provided.
 - No quality promise
 - I am just an IT dog in Hong Kong
 - No hope

